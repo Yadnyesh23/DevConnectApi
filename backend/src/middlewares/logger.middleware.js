@@ -3,7 +3,6 @@ const logger = (req, res, next) => {
         const method = req.method
         const url = req.originalUrl
         const timestamps = new Date().toISOString()
-        const statuscode = res.statusCode
 
         res.on("finish", () => {
         const statusCode = res.statusCode;
