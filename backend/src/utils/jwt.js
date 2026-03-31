@@ -8,4 +8,4 @@ const generateJWT = (payload) => {
  )
 }
 
-export default generateJWT
+export {generateJWT}

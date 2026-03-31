@@ -11,9 +11,11 @@ app.use(logger)
 // Routes
 import healthcheckRoute from './routes/healthcheck.route.js'
 import authRoutes from './routes/auth.route.js'
+import userRoutes from './routes/user.route.js'
 
 
 app.use('/api/v1', healthcheckRoute )
 app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/user', userRoutes)
 
 export default app

@@ -1,4 +1,4 @@
-import registerUserService from "../services/auth.service.js"
+import {registerUserService , loginUserService} from "../services/auth.service.js"
 
 const registerController = async (req, res) => {
     try {
@@ -30,4 +30,32 @@ const registerController = async (req, res) => {
     }
 }
 
-export {registerController}
+const loginController = async (req, res) => {
+    try {
+        const { email, password } = req.body
+
+        if (!email || !password) {
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "All fields are required."
+            })
+        }
+
+        const result = await loginUserService(email, password)
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            data: result
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message || "Login failed"
+        })
+    }
+}
+
+export {registerController, loginController}
