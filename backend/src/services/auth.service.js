@@ -1,18 +1,21 @@
-import {addUser, getUser} from '../repositories/auth.repository.js'
+import { addUser, getUserByEmail } from '../repositories/auth.repository.js'
 import bcrypt from 'bcrypt'
 
 const registerUserService = async (name, email, password) => {
-        const existUser =  getUser(name, email)
 
-        if(existUser){
-            throw new Error("User already registered")
-        }
-        const hashedPassword = await bcrypt.hash(password, 10)
-        const newUser = addUser(name, email, hashedPassword)
+    const existUser = await getUserByEmail(email)
 
-        const { password: _, ...safeUser } = newUser
+    if (existUser) {
+        throw new Error("User already registered")
+    }
 
-        return safeUser
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const newUser = await addUser(name, email, hashedPassword)
+
+    const { password: _, ...safeUser } = newUser.toObject()
+
+    return safeUser
 }
 
-export default registerUserService;
+export default registerUserService
