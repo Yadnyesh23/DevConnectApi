@@ -10,7 +10,10 @@ app.use(logger)
 
 // Routes
 import healthcheckRoute from './routes/healthcheck.route.js'
+import authRoutes from './routes/auth.route.js'
+
 
 app.use('/api/v1', healthcheckRoute )
+app.use('/api/v1/auth', authRoutes)
 
 export default app
