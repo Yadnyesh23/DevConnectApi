@@ -18,4 +18,8 @@ app.use('/api/v1', healthcheckRoute )
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/user', userRoutes)
 
+import errorHandler from "./middlewares/error.middleware.js";
+
+app.use(errorHandler); 
+
 export default app
